@@ -1,9 +1,7 @@
 package com.FacutraExpress.apiFactura.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,10 +21,12 @@ public class Usuario {
     private int id;
     private String apellido;
     private String cedula;
+    @JsonIgnore
     private String clave;
     private String correo;
     private String departamento;
     private String direccion;
+    @Column(name = "fecha_nacimiento")
     private Date fecha;
     private String municipio;
     private String nombre;

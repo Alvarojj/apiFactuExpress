@@ -22,7 +22,7 @@ public class Comercio {
     private int nit;
     private String departamento;
     private String direccion;
-    private String municiopio;
+    private String municipio;
     private String razon;
     private String telefono;
 

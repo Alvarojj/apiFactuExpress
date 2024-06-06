@@ -20,7 +20,6 @@ public class Producto {
     private double total;
     @JoinColumn(name = "total_iva")
     private double totalIva;
-    @ManyToOne
-    @JoinColumn(name = "idFactura")
-    private Factura factura;
+    @Column(name = "idfactura")
+    private int factura;
 }

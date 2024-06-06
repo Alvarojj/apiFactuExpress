@@ -24,10 +24,10 @@ public class Factura {
     private double subtotal;
     private double total;
     @ManyToOne
-    @JoinColumn(name = "idComercio")
+    @JoinColumn(name = "idcomercio")
     private Comercio comercio;
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "idusuario")
     private Usuario usuario;
     @OneToMany(mappedBy = "factura")
     private List<Producto> productos;
