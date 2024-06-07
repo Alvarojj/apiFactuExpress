@@ -26,6 +26,10 @@ public class UsuarioController {
         Optional<Usuario> usuario = usuarioService.obtenerInfoUsuario(id);
         return usuario.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
+    @GetMapping("ahorro/{id}")
+    public ResponseEntity<Double> ObtenerAhorro(@PathVariable int id) {
+        return new ResponseEntity<>(usuarioService.ObtenerAhorro(id), HttpStatus.OK);
     }
 }
