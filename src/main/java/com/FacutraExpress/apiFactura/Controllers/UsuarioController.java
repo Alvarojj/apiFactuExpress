@@ -4,10 +4,7 @@ import com.FacutraExpress.apiFactura.Models.Usuario;
 import com.FacutraExpress.apiFactura.Service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -20,6 +17,10 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @GetMapping("correo")
+    public ResponseEntity<Usuario> obtenerUsuarioPorCorreo(@RequestParam String correo) {
+        return new ResponseEntity<>(usuarioService.obtenerUsuarioPorCorreo(correo), HttpStatus.OK);
+    }
 
     @GetMapping("{id}")
     public ResponseEntity<Usuario> obtenerInfoUsuario(@PathVariable int id) {
@@ -31,5 +32,15 @@ public class UsuarioController {
     @GetMapping("ahorro/{id}")
     public ResponseEntity<Double> ObtenerAhorro(@PathVariable int id) {
         return new ResponseEntity<>(usuarioService.ObtenerAhorro(id), HttpStatus.OK);
+    }
+
+
+
+    @PostMapping
+    public ResponseEntity<HttpStatus> guardarUsuario(
+            @RequestBody Usuario usuario
+    ) {
+        usuarioService.guardarUsuario(usuario);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

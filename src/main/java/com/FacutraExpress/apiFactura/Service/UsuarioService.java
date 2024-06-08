@@ -13,9 +13,18 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final FacturaService facturaService;
 
+
+    public void guardarUsuario(Usuario usuario) {
+        usuarioRepository.save(usuario);
+    }
     public UsuarioService(UsuarioRepository usuarioRepository, FacturaService facturaService) {
         this.usuarioRepository = usuarioRepository;
         this.facturaService = facturaService;
+    }
+
+
+    public Usuario obtenerUsuarioPorCorreo(String correo) {
+       return usuarioRepository.findByCorreo(correo);
     }
 
     public Optional<Usuario> obtenerInfoUsuario(int idUsuario) {
@@ -47,4 +56,7 @@ public class UsuarioService {
         double ahorroPorFactura = 15;
         return ahorroPorFactura * facturas.size();
     }
+
+
+
 }
