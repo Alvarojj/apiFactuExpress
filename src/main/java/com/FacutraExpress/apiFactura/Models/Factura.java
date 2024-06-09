@@ -24,7 +24,6 @@ public class Factura {
     private int numeroFactura;
     private double subtotal;
     private double total;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idcomercio")
     private Comercio comercio;
