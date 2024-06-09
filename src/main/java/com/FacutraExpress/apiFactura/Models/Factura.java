@@ -1,5 +1,6 @@
 package com.FacutraExpress.apiFactura.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import com.FacutraExpress.apiFactura.Models.Comercio;
@@ -23,6 +24,7 @@ public class Factura {
     private int numeroFactura;
     private double subtotal;
     private double total;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idcomercio")
     private Comercio comercio;

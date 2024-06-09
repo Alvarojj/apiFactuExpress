@@ -22,7 +22,7 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.obtenerUsuarioPorCorreo(correo), HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id}") 
     public ResponseEntity<Usuario> obtenerInfoUsuario(@PathVariable int id) {
         Optional<Usuario> usuario = usuarioService.obtenerInfoUsuario(id);
         return usuario.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
