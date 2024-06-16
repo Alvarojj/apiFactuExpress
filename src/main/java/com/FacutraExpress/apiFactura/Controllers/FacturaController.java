@@ -19,7 +19,7 @@ public class FacturaController {
         this.facturaService = facturaService;
     }
 
-
+    
     @GetMapping("{id}")
     public List<Factura> obteneFactura(@PathVariable int id){
         return facturaService.obtenerFactura(id);
