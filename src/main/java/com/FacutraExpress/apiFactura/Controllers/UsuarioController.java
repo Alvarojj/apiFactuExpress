@@ -24,13 +24,12 @@ public class UsuarioController {
 
     @GetMapping("{id}") 
     public ResponseEntity<Usuario> obtenerInfoUsuario(@PathVariable int id) {
-        Optional<Usuario> usuario = usuarioService.obtenerInfoUsuario(id);
-        return usuario.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+            return new ResponseEntity<>(usuarioService.obtenerInfoUsuario(id), HttpStatus.OK);
     }
 
     @GetMapping("ahorro/{id}")
-    public ResponseEntity<Double> ObtenerAhorro(@PathVariable int id) {
+    public ResponseEntity<Integer> ObtenerAhorro(@PathVariable int id) {
         return new ResponseEntity<>(usuarioService.ObtenerAhorro(id), HttpStatus.OK);
     }
 

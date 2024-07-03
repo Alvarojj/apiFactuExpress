@@ -1,6 +1,7 @@
 package com.FacutraExpress.apiFactura.Service;
 
 import com.FacutraExpress.apiFactura.Models.Factura;
+import com.FacutraExpress.apiFactura.Models.FacturaDto;
 import com.FacutraExpress.apiFactura.Models.FacturasSalidaDto;
 import com.FacutraExpress.apiFactura.Repository.FacturaRepository;
 import org.springframework.stereotype.Service;
@@ -40,19 +41,14 @@ public class FacturaService {
         if (count == 0) {
             FacturasSalidaDto newfacturas = FacturasSalidaDto.builder()
                     .id(factura.getComercio().getId())
-                    .nit(factura.getComercio().getNit())
-                    .razon(factura.getComercio().getRazon())
-                    .departamento(factura.getComercio().getDepartamento())
-                    .direccion(factura.getComercio().getDireccion())
-                    .municipio(factura.getComercio().getMunicipio())
-                    .telefono(factura.getComercio().getTelefono())
+                    .nombre(factura.getComercio().getNombre())
                     .factura(new ArrayList<>()).build();
-            newfacturas.getFactura().add(factura);
+            newfacturas.getFactura().add(new FacturaDto(factura.getId(), factura.getFecha(), factura.getTotal(),factura.getDescripcion()));
             facturasSalidaDtos.add(newfacturas);
         } else {
             for (FacturasSalidaDto facturasSalidaDto : facturasSalidaDtos) {
                 if (facturasSalidaDto.getId() == factura.getComercio().getId()) {
-                    facturasSalidaDto.getFactura().add(factura);
+                    facturasSalidaDto.getFactura().add(new FacturaDto(factura.getId(), factura.getFecha(), factura.getTotal(),factura.getDescripcion()));
                 }
             }
         }

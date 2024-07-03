@@ -11,11 +11,6 @@ import java.util.List;
 @Builder
 public class FacturasSalidaDto {
     private int id;
-    private int nit;
-    private String departamento;
-    private String direccion;
-    private String municipio;
-    private String razon;
-    private String telefono;
-    private List<Factura> factura;
+    private String nombre;
+    private List<FacturaDto> factura;
 }

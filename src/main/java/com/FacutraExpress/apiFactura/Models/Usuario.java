@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 
 @Entity
@@ -15,19 +18,17 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "Usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private int id;
+    @Column(name = "ahorro_papel")
+    private int ahorroPapel;
     private String apellido;
     private String cedula;
     private String correo;
-    private String departamento;
-    private String direccion;
-    @Column(name = "fecha_nacimiento")
-    private Date fecha;
-    private String municipio;
     private String nombre;
-    private String telefono;
 
 }

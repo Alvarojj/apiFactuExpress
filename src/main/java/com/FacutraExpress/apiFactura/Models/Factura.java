@@ -14,23 +14,20 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "factura")
 public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_factura")
     private int id;
     private Date fecha;
-    private double iva;
-    @JoinColumn(name = "numero_factura")
-    private int numeroFactura;
-    private double subtotal;
     private double total;
-    @ManyToOne
-    @JoinColumn(name = "idcomercio")
+    private String descripcion;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario")
+    private Usuario Usuario;
+    @ManyToOne()
+    @JoinColumn(name = "id_comercio")
     private Comercio comercio;
-    @ManyToOne
-    @JoinColumn(name = "idusuario")
-    private Usuario usuario;
-    @OneToMany(mappedBy = "factura")
-    private List<Producto> productos;
 
 }

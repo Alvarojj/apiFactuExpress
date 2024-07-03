@@ -1,29 +1,27 @@
 package com.FacutraExpress.apiFactura.Models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "comercio")
 public class Comercio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_comercio")
     private int id;
-    private int nit;
-    private String departamento;
-    private String direccion;
-    private String municipio;
-    private String razon;
-    private String telefono;
+    private String nombre;
+    @OneToMany(mappedBy = "comercio")
+    List<Factura> facturas;
 
 }

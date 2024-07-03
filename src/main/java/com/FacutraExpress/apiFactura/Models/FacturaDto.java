@@ -6,20 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+import java.util.Date;
+
+
+
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Producto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FacturaDto {
     private int id;
-    private int cantidad;
-    private String nombre;
+    private Date fecha;
     private double total;
-    @JoinColumn(name = "total_iva")
-    private double totalIva;
-    @Column(name = "idfactura")
-    private int factura;
+    private String descripcion;
 }

@@ -13,50 +13,26 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final FacturaService facturaService;
 
-
-    public void guardarUsuario(Usuario usuario) {
-        usuarioRepository.save(usuario);
-    }
     public UsuarioService(UsuarioRepository usuarioRepository, FacturaService facturaService) {
         this.usuarioRepository = usuarioRepository;
         this.facturaService = facturaService;
     }
 
-
+    public void guardarUsuario(Usuario usuario) {
+        usuarioRepository.save(usuario);
+    }
     public Usuario obtenerUsuarioPorCorreo(String correo) {
        return usuarioRepository.findByCorreo(correo);
     }
 
-    public Optional<Usuario> obtenerInfoUsuario(int idUsuario) {
+    public Usuario obtenerInfoUsuario(int idUsuario) {
         return usuarioRepository.findById(idUsuario);
     }
 
 
-    public double ObtenerAhorro(int idUsuario) {
-        List<Factura> facturas = facturaService.obtenerFactura(idUsuario);
-        if (!facturas.isEmpty()) {
-            double ahorroPorProducto = ahorroPorProducto(facturas);
-            double ahorroPorFactura = ahorroPorFactura(facturas);
-            return ahorroPorFactura + ahorroPorProducto;
-        }
-        return 0;
+    public int ObtenerAhorro(int idUsuario) {
+        Usuario usuario = usuarioRepository.findById(idUsuario);
+        return usuario.getAhorroPapel();
     }
-
-
-
-    public double ahorroPorProducto (List<Factura> facturas) {
-        double ahorroPorProducto = 0;
-        for (Factura factura : facturas) {
-            ahorroPorProducto += factura.getProductos().size();
-        }
-        return ahorroPorProducto;
-    }
-
-    public double ahorroPorFactura(List<Factura> facturas) {
-        double ahorroPorFactura = 15;
-        return ahorroPorFactura * facturas.size();
-    }
-
-
 
 }
