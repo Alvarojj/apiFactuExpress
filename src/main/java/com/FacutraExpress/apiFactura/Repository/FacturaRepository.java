@@ -11,8 +11,8 @@ import java.util.List;
 
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Integer> {
-    @Query(value = "SELECT * from factura WHERE id_usuario = :idUser", nativeQuery = true)
-    List<Factura> obtenerFacturaIdUsuario(@Param("idUser") int idUser);
+    @Query(value = "SELECT count(*) from factura WHERE id_usuario = :idUser", nativeQuery = true)
+    int obtenerNumFacturaIdUsuario(@Param("idUser") int idUser);
 
     @Query(value = "SELECT * FROM factura WHERE id_usuario = :idUsuario AND fecha LIKE %:fecha%", nativeQuery = true)
     List<Factura> obtenerFacturaIdUsuarioAndFecha(@Param("idUsuario") int idUsuario, @Param("fecha") String fecha);

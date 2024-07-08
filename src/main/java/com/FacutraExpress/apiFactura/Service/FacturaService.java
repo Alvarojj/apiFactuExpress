@@ -1,9 +1,9 @@
 package com.FacutraExpress.apiFactura.Service;
 
-import com.FacutraExpress.apiFactura.Models.Factura;
-import com.FacutraExpress.apiFactura.Models.FacturaDto;
-import com.FacutraExpress.apiFactura.Models.FacturasSalidaDto;
+import com.FacutraExpress.apiFactura.Models.*;
+import com.FacutraExpress.apiFactura.Repository.ComercioRepository;
 import com.FacutraExpress.apiFactura.Repository.FacturaRepository;
+import com.FacutraExpress.apiFactura.Repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,13 +15,20 @@ public class FacturaService {
 
     private final FacturaRepository facturaRepository;
 
-    public FacturaService(FacturaRepository facturaRepository) {
+    private final UsuarioRepository usuarioRepository;
+
+    private final ComercioRepository comercioRepository;
+
+    public FacturaService(FacturaRepository facturaRepository,
+                          UsuarioRepository usuarioRepository,
+                          ComercioRepository comercioRepository) {
         this.facturaRepository = facturaRepository;
+        this.comercioRepository = comercioRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
-    public List<Factura> obtenerFactura(int idUsuario) {
-        return facturaRepository.obtenerFacturaIdUsuario(idUsuario);
-
+    public int obtenerFactura(int idUsuario) {
+        return facturaRepository.obtenerNumFacturaIdUsuario(idUsuario);
     }
 
 
@@ -53,5 +60,30 @@ public class FacturaService {
             }
         }
         return facturasSalidaDtos;
+    }
+
+    public String saveFactura(Factura factura) {
+        Usuario usuario = getUsuario(factura.getUsuario().getId());
+        Comercio comercio = getComercio(factura.getComercio().getId());
+        if (comercio != null && usuario != null){
+            factura.setUsuario(usuario);
+            factura.setComercio(comercio);
+            factura.setFecha(new Date());
+            facturaRepository.save(factura);
+            int n = usuarioRepository.updateAhorro(usuario.getAhorroPapel() + 15, usuario.getId());
+            return "Factura enviada correctamente";
+        } else {
+            return "Factura no enviada";
+        }
+
+    }
+
+
+    public Usuario getUsuario(int id){
+        return usuarioRepository.findById(id);
+    }
+
+    public Comercio getComercio(int id) {
+        return comercioRepository.findById(id);
     }
 }

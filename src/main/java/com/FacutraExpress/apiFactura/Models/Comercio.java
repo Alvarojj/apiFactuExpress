@@ -21,7 +21,5 @@ public class Comercio {
     @Column(name = "id_comercio")
     private int id;
     private String nombre;
-    @OneToMany(mappedBy = "comercio")
-    List<Factura> facturas;
 
 }

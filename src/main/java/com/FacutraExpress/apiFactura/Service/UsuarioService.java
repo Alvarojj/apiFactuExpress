@@ -19,7 +19,9 @@ public class UsuarioService {
     }
 
     public void guardarUsuario(Usuario usuario) {
-        usuarioRepository.save(usuario);
+        usuario.setAhorroPapel(0);
+        usuarioRepository.save(usuario.getAhorroPapel(), usuario.getApellido(), usuario.getCedula(),
+                usuario.getCorreo(), usuario.getNombre());
     }
     public Usuario obtenerUsuarioPorCorreo(String correo) {
        return usuarioRepository.findByCorreo(correo);

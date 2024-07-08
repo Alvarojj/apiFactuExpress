@@ -21,12 +21,17 @@ public class FacturaController {
 
     
     @GetMapping("{id}")
-    public List<Factura> obteneFactura(@PathVariable int id){
+    public int obteneFactura(@PathVariable int id){
         return facturaService.obtenerFactura(id);
     }
 
     @GetMapping("{id}/{fecha}")
     public ResponseEntity<List<FacturasSalidaDto>> obtenerFacturaPorFecha(@PathVariable int id, @PathVariable String fecha) {
         return new ResponseEntity<>(facturaService.obtenerFacturaPorFecha(id, fecha), HttpStatus.OK);
+    }
+
+    @PostMapping("save")
+    public String newFactura(@RequestBody Factura factura) {
+        return facturaService.saveFactura(factura);
     }
 }
