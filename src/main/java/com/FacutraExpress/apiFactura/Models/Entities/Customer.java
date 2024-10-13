@@ -1,10 +1,7 @@
 package com.FacutraExpress.apiFactura.Models.Entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,6 +10,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "customers")
 public class Customer {
     @Id
@@ -28,6 +26,4 @@ public class Customer {
     private int status;
     @Column(name = "number_identification")
     private String numberIdentification;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Bills> bills;
 }
