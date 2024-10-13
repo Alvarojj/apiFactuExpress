@@ -1,5 +1,6 @@
 package com.FacutraExpress.apiFactura.Models.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +26,6 @@ public class TypePayment {
     @Column(name = "status")
     private String status;
     @OneToMany(mappedBy = "typePayment", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Bills> bills;
 }

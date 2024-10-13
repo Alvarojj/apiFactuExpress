@@ -1,5 +1,6 @@
 package com.FacutraExpress.apiFactura.Models.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +19,7 @@ public class Item {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "id_bill")
+    @JsonIgnore
     private Bills bills;
     @Column(name = "code_reference")
     private String codeReference;

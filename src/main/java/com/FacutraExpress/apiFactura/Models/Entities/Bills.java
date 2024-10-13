@@ -1,5 +1,6 @@
 package com.FacutraExpress.apiFactura.Models.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,11 +19,11 @@ public class Bills {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "id_customer")
-    private Customer customer;
+    @Column(name = "id_customer")
+    private Long idCustomer;
     @ManyToOne
     @JoinColumn(name = "id_company")
+    @JsonIgnore
     private Company company;
     @ManyToOne
     @JoinColumn(name = "id_type_payment")
